@@ -1,13 +1,28 @@
+import React, { useState } from "react";
+import "./../styles/App.css";
+import TodoList from "./TodoList";
 
-import React from "react";
-import './../styles/App.css';
+  const App = () => {
+    const [todos, setTodos] = useState([
+      { todo: "Learn React", state: false },
+      { todo: "Build a react app", state: false },
+      { todo: "Deploy the react app", state: false },
+    ]);
 
-const App = () => {
-  return (
-    <div>
-        {/* Do not remove the main div */}
-    </div>
-  )
-}
+    function handleComplete(idx) {
+      const updatedTodos = todos.map((todo, index) =>
+        index === idx ? { ...todo, state: true } : todo
+      );
+      setTodos(updatedTodos);
+    }
 
-export default App
+    return (
+      <div>
+        <h1>Parent Component</h1>
+        <TodoList todos={todos} handleComplete={handleComplete} />
+      </div>
+    );
+  };
+
+
+export default App;
